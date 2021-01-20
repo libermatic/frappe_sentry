@@ -58,6 +58,11 @@ app_license = "MIT"
 # before_install = "sentry.install.before_install"
 # after_install = "sentry.install.after_install"
 
+# Session
+# ------------
+
+extend_bootinfo = "sentry.session.extend_bootinfo"
+
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
