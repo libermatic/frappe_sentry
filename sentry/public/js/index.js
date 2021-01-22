@@ -8,13 +8,35 @@ const dsn =
     : null;
 
 const getErrorName = R.compose(R.last, R.dropLast(1), R.split('\\n'), R.trim);
+const getTransacationName = R.compose(R.join('/'), R.take(2));
 
 if (dsn) {
   Sentry.init({
     dsn,
     release: `frappe@${frappe.boot.versions.frappe}`,
-    integrations: [new Integrations.BrowserTracing()],
-    tracesSampleRate: 0.1,
+    integrations: [
+      new Integrations.BrowserTracing({
+        beforeNavigate: (context) => ({
+          ...context,
+          name: `/${getTransacationName(frappe.get_route())}`,
+        }),
+      }),
+    ],
+    tracesSampler: ({ transactionContext, parentSampled }) => {
+      if (parentSampled !== undefined) {
+        return parentSampled;
+      }
+      if (transactionContext.name.startsWith('/modules')) {
+        return 0.01;
+      }
+      if (transactionContext.name.startsWith('/List')) {
+        return 0.05;
+      }
+      if (transactionContext.name.startsWith('/Form')) {
+        return 0.3;
+      }
+      return 0.1;
+    },
   });
   Sentry.setUser({ email: frappe.boot.user.email });
   Sentry.setTag('sitename', frappe.boot.sitename);
