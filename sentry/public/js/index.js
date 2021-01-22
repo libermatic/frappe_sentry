@@ -14,7 +14,7 @@ if (dsn) {
     dsn,
     release: `frappe@${frappe.boot.versions.frappe}`,
     integrations: [new Integrations.BrowserTracing()],
-    tracesSampleRate: 1.0,
+    tracesSampleRate: 0.1,
   });
   Sentry.setUser({ email: frappe.boot.user.email });
   Sentry.setTag('sitename', frappe.boot.sitename);
