@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/libermatic/sentry#readme",
   "dependencies": {
-    "@sentry/browser": "^6.0.0",
-    "@sentry/tracing": "^6.0.0"
+    "@sentry/browser": "^6.0.1",
+    "@sentry/tracing": "^6.0.1",
+    "ramda": "^0.27.1"
   }
 }
