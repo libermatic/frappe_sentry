@@ -43,6 +43,10 @@ if (dsn) {
   Sentry.setContext('apps', frappe.boot.versions);
 
   $(document).ajaxError(function (_event, jqXHR, ajaxSettings, thrownError) {
+    if (jqXHR.status < 400) {
+      return;
+    }
+
     const message =
       (jqXHR.responseJSON &&
         jqXHR.responseJSON.exc &&
