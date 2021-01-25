@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import { Integrations } from '@sentry/tracing';
 import * as R from 'ramda';
+import { getStatusMessage } from './status_codes';
 
 const dsn =
   !frappe.boot.developer_mode && frappe.boot.sentry
@@ -43,7 +44,8 @@ if (dsn) {
   Sentry.setContext('apps', frappe.boot.versions);
 
   $(document).ajaxError(function (_event, jqXHR, ajaxSettings, thrownError) {
-    if (jqXHR.status < 400) {
+    const error = getStatusMessage(jqXHR.status);
+    if (!error) {
       return;
     }
 
