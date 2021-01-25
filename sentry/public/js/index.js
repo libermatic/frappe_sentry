@@ -54,13 +54,15 @@ if (dsn) {
       '';
 
     Sentry.captureMessage(thrownError || jqXHR.statusText, (scope) => {
-      scope.setExtras({
-        method: ajaxSettings.type,
-        url: ajaxSettings.url,
-        payload: ajaxSettings.data,
-        status: jqXHR.status,
-        message,
-      });
+      scope.setExtras(
+        R.filter((x) => R.not(R.isNil(x)), {
+          method: ajaxSettings.type,
+          url: ajaxSettings.url,
+          payload: ajaxSettings.data,
+          status: jqXHR.status,
+          message,
+        })
+      );
     });
   });
 }
