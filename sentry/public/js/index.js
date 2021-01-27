@@ -14,7 +14,7 @@ const getTransacationName = R.compose(R.join('/'), R.take(2));
 if (dsn) {
   Sentry.init({
     dsn,
-    release: `frappe@${frappe.boot.versions.frappe}`,
+    release: `frappe-apps@${frappe.boot.sentry.build_version}`,
     integrations: [
       new Integrations.BrowserTracing({
         beforeNavigate: (context) => ({
