@@ -57,9 +57,12 @@ if (dsn) {
 
     Sentry.captureMessage(thrownError || jqXHR.statusText, (scope) => {
       scope.setExtras(
-        R.filter((x) => R.not(R.isNil(x)), {
+        R.filter(R.identity, {
           method: ajaxSettings.type,
           url: ajaxSettings.url,
+          header:
+            ajaxSettings.headers &&
+            new URLSearchParams(ajaxSettings.headers).toString(),
           payload: ajaxSettings.data,
           status: jqXHR.status,
           message,
