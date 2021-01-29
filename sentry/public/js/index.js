@@ -55,7 +55,7 @@ if (dsn) {
         getErrorName(jqXHR.responseJSON.exc)) ||
       '';
 
-    Sentry.captureMessage(thrownError || jqXHR.statusText, (scope) => {
+    Sentry.captureMessage(error, (scope) => {
       scope.setExtras(
         R.filter(R.identity, {
           method: ajaxSettings.type,
