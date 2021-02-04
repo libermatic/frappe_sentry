@@ -54,6 +54,13 @@ if (dsn) {
         jqXHR.responseJSON.exc &&
         getErrorName(jqXHR.responseJSON.exc)) ||
       '';
+    const text = jqXHR.responseText
+      .replace(
+        /<(script|style)\b[^<]*(?:(?!<\/(script|style)>)<[^<]*)*<\/(script|style)>/gi,
+        ''
+      )
+      .replace(/(<([^>]+)>)/gi, '')
+      .replace(/\s+/g, ' ');
 
     Sentry.captureMessage(error, (scope) => {
       scope.setExtras(
@@ -66,6 +73,7 @@ if (dsn) {
           payload: ajaxSettings.data,
           status: jqXHR.status,
           message,
+          text,
         })
       );
     });
