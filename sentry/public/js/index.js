@@ -31,12 +31,12 @@ if (dsn) {
         return 0.01;
       }
       if (transactionContext.name.startsWith('/List')) {
-        return 0.05;
+        return 0.03;
       }
       if (transactionContext.name.startsWith('/Form')) {
-        return 0.3;
+        return 0.1;
       }
-      return 0.1;
+      return 0.05;
     },
   });
   Sentry.setUser({ email: frappe.boot.user.email });
