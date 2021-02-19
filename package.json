@@ -1,6 +1,6 @@
 {
   "name": "sentry",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Sentry for frappe sites",
   "main": "sentry/public/index.js",
   "scripts": {
