@@ -49,6 +49,14 @@ if (dsn) {
       return;
     }
 
+    if (
+      jqXHR.status === 400 &&
+      jqXHR.responseJSON &&
+      jqXHR.responseJSON.exc_type === 'CSRFTokenError'
+    ) {
+      return;
+    }
+
     const message =
       (jqXHR.responseJSON &&
         jqXHR.responseJSON.exc &&
