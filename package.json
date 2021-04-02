@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/libermatic/frappe_sentry#readme",
   "dependencies": {
-    "@sentry/browser": "^6.0.2",
-    "@sentry/tracing": "^6.0.2",
+    "@sentry/browser": "^6.2.5",
+    "@sentry/tracing": "^6.2.5",
     "ramda": "^0.27.1"
   }
 }
