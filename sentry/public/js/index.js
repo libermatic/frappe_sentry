@@ -9,7 +9,6 @@ const dsn =
     : null;
 
 const getErrorName = R.compose(R.last, R.dropLast(1), R.split('\\n'), R.trim);
-const getTransacationName = R.compose(R.join('/'), R.take(2));
 
 if (dsn) {
   Sentry.init({
@@ -19,7 +18,7 @@ if (dsn) {
       new Integrations.BrowserTracing({
         beforeNavigate: (context) => ({
           ...context,
-          name: `/${getTransacationName(frappe.get_route())}`,
+          type: R.head(frappe.get_route() || []),
         }),
       }),
     ],
@@ -27,13 +26,13 @@ if (dsn) {
       if (parentSampled !== undefined) {
         return parentSampled;
       }
-      if (transactionContext.name.startsWith('/modules')) {
+      if (transactionContext.type === 'Workspaces') {
         return 0.01;
       }
-      if (transactionContext.name.startsWith('/List')) {
+      if (transactionContext.type === 'List') {
         return 0.03;
       }
-      if (transactionContext.name.startsWith('/Form')) {
+      if (transactionContext.type === 'Form') {
         return 0.1;
       }
       return 0.05;
