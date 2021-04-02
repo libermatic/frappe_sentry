@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import frappe
-from frappe.www.desk import get_build_version
+from frappe.utils import get_build_version
 
 
 def extend_bootinfo(bootinfo):
