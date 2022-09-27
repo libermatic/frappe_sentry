@@ -10,4 +10,4 @@ __pycache__
 # Bench runtime
 node_modules/
 sentry/public/node_modules
-yarn.lock
+sentry/public/dist
