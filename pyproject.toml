@@ -1,0 +1,20 @@
+[project]
+name = "frappe_sentry"
+authors = [
+    { name = "Libermatic LLP", email = "info@libermatic.com"}
+]
+description = "Exception handlers"
+requires-python = ">=3.10"
+readme = "README.md"
+dynamic = ["version"]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench.dev-dependencies]
+black = "==20.8b1"
+
+[tool.black]
+line-length = 88
+
