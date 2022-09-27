@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/browser';
-import { Integrations } from '@sentry/tracing';
+import { BrowserTracing } from '@sentry/tracing';
 import * as R from 'ramda';
 import { getStatusMessage } from './status_codes';
 
@@ -15,7 +15,7 @@ if (dsn) {
     dsn,
     release: `frappe-apps@${frappe.boot.sentry.build_version}`,
     integrations: [
-      new Integrations.BrowserTracing({
+      new BrowserTracing({
         beforeNavigate: (context) => ({
           ...context,
           type: R.head(frappe.get_route() || []),
